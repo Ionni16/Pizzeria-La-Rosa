@@ -81,7 +81,7 @@ export default function MenuDishRow({ lang, dish }: { lang: Lang; dish: DishRow 
   return (
     <article className="py-5 border-b border-black/10">
       {/* TOP: foto a sinistra accanto al titolo, prezzo a destra */}
-      <div className="flex items-start gap-4">
+      <div className="flex items-center gap-4">
         <div className="shrink-0">
           {dish.image_url ? (
             <DishImage
@@ -95,13 +95,13 @@ export default function MenuDishRow({ lang, dish }: { lang: Lang; dish: DishRow 
         </div>
 
         <div className="min-w-0 flex-1">
-          <div className="flex items-start justify-between gap-4">
-            <h3 className="min-w-0 truncate text-[21px] sm:text-[22px] font-semibold tracking-tight text-neutral-900">
+          <div className="flex items-center justify-between gap-4">
+            <h3 className="min-w-0 truncate text-[21px] sm:text-[22px] font-semibold tracking-tight text-neutral-900 leading-tight">
               {name}
             </h3>
 
             {price ? (
-              <div className="shrink-0 text-[16px] sm:text-[17px] font-semibold text-[#c81f2d] tabular-nums">
+              <div className="shrink-0 text-[16px] sm:text-[17px] font-semibold text-[#c81f2d] tabular-nums leading-tight">
                 {price}
               </div>
             ) : null}
