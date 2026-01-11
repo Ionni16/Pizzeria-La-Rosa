@@ -22,9 +22,11 @@ export default async function AllergensAdminPage() {
 
   if (error) {
     return (
-      <div>
+      <div className="w-full">
         <h1 className="text-2xl font-semibold tracking-tight">Allergeni</h1>
-        <p className="mt-3 text-sm text-red-700">Errore caricando gli allergeni: {error.message}</p>
+        <p className="mt-3 text-sm text-red-700">
+          Errore caricando gli allergeni: {error.message}
+        </p>
       </div>
     );
   }
@@ -82,12 +84,14 @@ export default async function AllergensAdminPage() {
   }
 
   return (
-    <div className="mx-auto max-w-5xl overflow-x-hidden">
+    <div className="w-full">
       {/* HEADER */}
       <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
         <div>
           <h1 className="text-2xl font-semibold tracking-tight">Allergeni</h1>
-          <p className="mt-1 text-sm text-black/60">Premi “Modifica” per cambiare o eliminare.</p>
+          <p className="mt-1 text-sm text-black/60">
+            Premi “Modifica” per cambiare o eliminare.
+          </p>
         </div>
         <div className="text-sm text-black/50">{allergens.length} allergeni</div>
       </div>
@@ -149,7 +153,9 @@ export default async function AllergensAdminPage() {
               <summary className="list-none cursor-pointer px-4 py-4 flex items-center justify-between gap-3 [&::-webkit-details-marker]:hidden hover:bg-black/[0.02] transition">
                 <div className="min-w-0">
                   <div className="flex flex-col gap-1 sm:flex-row sm:items-center sm:gap-3 min-w-0">
-                    <div className="text-sm sm:text-base font-semibold text-black/90 truncate">{it}</div>
+                    <div className="text-sm sm:text-base font-semibold text-black/90 truncate">
+                      {it}
+                    </div>
                     <div className="hidden sm:block h-1 w-1 rounded-full bg-black/20" />
                     <div className="text-sm sm:text-base text-black/60 truncate">{en}</div>
                   </div>
@@ -165,7 +171,6 @@ export default async function AllergensAdminPage() {
               <div className="px-4 pb-4">
                 <div className="mt-2 h-px bg-black/10" />
 
-                {/* ✅ UN SOLO FORM (niente form annidati) */}
                 <form action={updateAllergen} className="mt-4 grid gap-3 md:grid-cols-[1fr_1fr_240px]">
                   <input type="hidden" name="id" value={a.id} />
 

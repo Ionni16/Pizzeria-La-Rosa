@@ -57,7 +57,7 @@ export default async function AdminDishesListPage({
 
   if (!firstCat) {
     return (
-      <div className="mx-auto max-w-5xl px-4 py-10">
+      <div className="w-full py-4">
         <h1 className="text-2xl font-semibold tracking-tight">Piatti</h1>
         <p className="mt-2 text-sm text-black/60">Nessuna categoria attiva trovata.</p>
       </div>
@@ -79,10 +79,10 @@ export default async function AdminDishesListPage({
   if (dErr) throw new Error(dErr.message);
 
   return (
-    <main className="min-h-screen bg-[rgb(252,250,246)] text-neutral-900 overflow-x-hidden">
+    <div className="w-full">
       <CategorySelect categories={catList} currentCategoryId={selectedCategoryId} />
 
-      <div className="mx-auto max-w-5xl px-4 py-6">
+      <div className="pt-6">
         {/* Header */}
         <div className="flex items-end justify-between gap-3">
           <div className="min-w-0">
@@ -105,7 +105,9 @@ export default async function AdminDishesListPage({
           {!dishes || dishes.length === 0 ? (
             <div className="p-6">
               <div className="text-sm font-semibold">Nessun piatto in questa categoria.</div>
-              <p className="mt-1 text-sm text-black/55">Crea il primo piatto con “Nuovo piatto”.</p>
+              <p className="mt-1 text-sm text-black/55">
+                Crea il primo piatto con “Nuovo piatto”.
+              </p>
             </div>
           ) : (
             <ul className="divide-y divide-black/10">
@@ -170,6 +172,6 @@ export default async function AdminDishesListPage({
 
         <div className="h-10" />
       </div>
-    </main>
+    </div>
   );
 }
