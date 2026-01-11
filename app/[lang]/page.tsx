@@ -117,10 +117,10 @@ export default async function MenuPage({ params }: { params: Promise<{ lang: Lan
                              [&::-webkit-details-marker]:hidden"
                 >
                   {/* TITOLO CATEGORIA: più grande + colori logo */}
-                  <div className="min-w-0 flex items-center gap-3">
-                    <span className="inline-flex h-2.5 w-2.5 rounded-full bg-[#1f7a3a]" />
+                  <div className="min-w-0 flex items-start gap-3">
+                    <span className="mt-2 inline-flex h-2.5 w-2.5 shrink-0 rounded-full bg-[#1f7a3a]" />
                     <h2
-                      className="min-w-0 truncate text-[22px] sm:text-[30px] font-semibold tracking-tight text-[#c81f2d]"
+                      className="min-w-0 flex-1 whitespace-normal break-words text-[26px] sm:text-[30px] font-semibold tracking-tight text-[#c81f2d] leading-tight"
                       style={{ fontFamily: "var(--font-display)" }}
                     >
                       {section.title}
