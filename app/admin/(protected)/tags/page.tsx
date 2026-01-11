@@ -168,44 +168,43 @@ export default async function TagsAdminPage() {
               <div className="px-4 pb-4">
                 <div className="mt-2 h-px bg-black/10" />
 
-                <form action={updateTag} className="mt-4 grid gap-3 md:grid-cols-[1fr_1fr_190px]">
+                <form action={updateTag} className="mt-4 grid gap-3 md:grid-cols-[1fr_1fr_240px]">
                   <input type="hidden" name="id" value={t.id} />
 
-                  <label className="block">
+                  <label className="block min-w-0">
                     <span className="text-xs font-medium text-black/70">Nome (IT)</span>
                     <input
                       name="label_it"
                       defaultValue={t.label_it ?? ""}
-                      className="mt-1 w-full rounded-xl border border-black/10 bg-white px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-[color:var(--brand-red)]/30"
+                      className="mt-1 w-full min-w-0 rounded-xl border border-black/10 bg-white px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-[color:var(--brand-red)]/30"
                     />
                   </label>
 
-                  <label className="block">
+                  <label className="block min-w-0">
                     <span className="text-xs font-medium text-black/70">Nome (EN)</span>
                     <input
                       name="label_en"
                       defaultValue={t.label_en ?? ""}
-                      className="mt-1 w-full rounded-xl border border-black/10 bg-white px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-[color:var(--brand-red)]/30"
+                      className="mt-1 w-full min-w-0 rounded-xl border border-black/10 bg-white px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-[color:var(--brand-red)]/30"
                     />
                   </label>
 
-                  <div className="flex gap-2 md:items-end">
+                  <div className="grid grid-cols-2 gap-2 md:items-end">
                     <button
                       type="submit"
-                      className="flex-1 h-[42px] rounded-xl bg-black px-4 py-2 text-sm font-semibold text-white hover:bg-black/90"
+                      className="h-[42px] rounded-xl bg-black px-4 py-2 text-sm font-semibold text-white hover:bg-black/90"
                     >
                       Salva
                     </button>
 
-                    <form action={deleteTag} className="contents">
-                      <input type="hidden" name="id" value={t.id} />
-                      <button
-                        type="submit"
-                        className="h-[42px] rounded-xl px-4 py-2 text-sm font-semibold ring-1 ring-red-200 text-red-700 hover:bg-red-50"
-                      >
-                        Elimina
-                      </button>
-                    </form>
+                    {/* ✅ niente form annidato: usa formAction */}
+                    <button
+                      type="submit"
+                      formAction={deleteTag}
+                      className="h-[42px] rounded-xl px-4 py-2 text-sm font-semibold ring-1 ring-red-200 text-red-700 hover:bg-red-50"
+                    >
+                      Elimina
+                    </button>
                   </div>
                 </form>
               </div>

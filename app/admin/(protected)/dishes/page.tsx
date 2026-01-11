@@ -44,7 +44,6 @@ export default async function AdminDishesListPage({
   const { supabase } = await requireAdmin();
   const sp = (await searchParams) ?? {};
 
-  // categorie (ordinate per position)
   const { data: categories, error: cErr } = await supabase
     .from("categories")
     .select("id,name_it,name_en,position,is_active")
@@ -65,13 +64,11 @@ export default async function AdminDishesListPage({
     );
   }
 
-  // default: se non selezioni categoria → prima categoria
   const selectedCategoryId = sp.category?.trim() || "";
   if (!selectedCategoryId) {
     redirect(`/admin/dishes?category=${firstCat.id}`);
   }
 
-  // piatti solo della categoria selezionata (performance)
   const { data: dishes, error: dErr } = await supabase
     .from("dishes")
     .select("id,category_id,name_it,name_en,price_eur,position,quantity,is_available,image_url")
@@ -82,13 +79,13 @@ export default async function AdminDishesListPage({
   if (dErr) throw new Error(dErr.message);
 
   return (
-    <main className="min-h-screen bg-[rgb(252,250,246)] text-neutral-900">
+    <main className="min-h-screen bg-[rgb(252,250,246)] text-neutral-900 overflow-x-hidden">
       <CategorySelect categories={catList} currentCategoryId={selectedCategoryId} />
 
       <div className="mx-auto max-w-5xl px-4 py-6">
         {/* Header */}
         <div className="flex items-end justify-between gap-3">
-          <div>
+          <div className="min-w-0">
             <h1 className="text-2xl font-semibold tracking-tight">Piatti</h1>
             <p className="mt-1 text-sm text-black/55">
               Seleziona una categoria per vedere e gestire i piatti.
@@ -97,7 +94,7 @@ export default async function AdminDishesListPage({
 
           <Link
             href="/admin"
-            className="hidden sm:inline-flex rounded-xl px-4 py-2 text-sm font-semibold ring-1 ring-black/10 bg-white hover:bg-black/5"
+            className="hidden sm:inline-flex shrink-0 rounded-xl px-4 py-2 text-sm font-semibold ring-1 ring-black/10 bg-white hover:bg-black/5"
           >
             Dashboard
           </Link>
@@ -131,8 +128,10 @@ export default async function AdminDishesListPage({
                         )}
 
                         <div className="min-w-0">
-                          <div className="flex items-center gap-2">
-                            <div className="truncate text-base sm:text-lg font-semibold">{t}</div>
+                          <div className="flex items-center gap-2 min-w-0">
+                            <div className="truncate text-base sm:text-lg font-semibold min-w-0">
+                              {t}
+                            </div>
 
                             {isAvailable ? (
                               <span className="shrink-0 rounded-full bg-emerald-50 px-2 py-1 text-[11px] font-semibold text-emerald-700 ring-1 ring-emerald-200">
@@ -153,14 +152,14 @@ export default async function AdminDishesListPage({
                       </div>
 
                       {/* Right price */}
-                      <div className="text-right">
-                        <div className="text-base sm:text-lg font-semibold text-[color:var(--brand-red)]">
+                      <div className="shrink-0 text-right">
+                        <div className="text-base sm:text-lg font-semibold text-[color:var(--brand-red)] tabular-nums">
                           {euro(d.price_eur)}
                         </div>
                       </div>
                     </div>
 
-                    {/* Actions (CLIENT component) */}
+                    {/* Actions (client) */}
                     <DishRowActions dishId={d.id} isAvailable={isAvailable} title={t} />
                   </li>
                 );

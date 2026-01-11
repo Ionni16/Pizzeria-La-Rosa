@@ -82,12 +82,12 @@ export default async function AllergensAdminPage() {
   }
 
   return (
-    <div className="mx-auto max-w-5xl">
+    <div className="mx-auto max-w-5xl overflow-x-hidden">
       {/* HEADER */}
       <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
         <div>
           <h1 className="text-2xl font-semibold tracking-tight">Allergeni</h1>
-          <p className="mt-1 text-sm text-black/60">Lista pulita. Premi “Modifica” per cambiare o eliminare.</p>
+          <p className="mt-1 text-sm text-black/60">Premi “Modifica” per cambiare o eliminare.</p>
         </div>
         <div className="text-sm text-black/50">{allergens.length} allergeni</div>
       </div>
@@ -95,9 +95,9 @@ export default async function AllergensAdminPage() {
       {/* CREA */}
       <details className="mt-6 group rounded-2xl bg-[rgb(252,250,246)] ring-1 ring-black/5 overflow-hidden">
         <summary className="list-none cursor-pointer px-4 py-4 flex items-center justify-between gap-3 [&::-webkit-details-marker]:hidden">
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-3 min-w-0">
             <span className="inline-flex h-2.5 w-2.5 rounded-full bg-[color:var(--brand-red)]" />
-            <div>
+            <div className="min-w-0">
               <div className="text-sm font-semibold tracking-tight">Crea allergene</div>
               <div className="text-xs text-black/50">Apri per inserire IT/EN</div>
             </div>
@@ -110,20 +110,20 @@ export default async function AllergensAdminPage() {
 
         <div className="px-4 pb-4">
           <form action={createAllergen} className="grid gap-3 md:grid-cols-[1fr_1fr_160px]">
-            <label className="block">
+            <label className="block min-w-0">
               <span className="text-xs font-medium text-black/70">Nome (IT)</span>
               <input
                 name="label_it"
-                className="mt-1 w-full rounded-xl border border-black/10 bg-white px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-[color:var(--brand-red)]/30"
+                className="mt-1 w-full min-w-0 rounded-xl border border-black/10 bg-white px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-[color:var(--brand-red)]/30"
                 placeholder="Glutine"
               />
             </label>
 
-            <label className="block">
+            <label className="block min-w-0">
               <span className="text-xs font-medium text-black/70">Nome (EN)</span>
               <input
                 name="label_en"
-                className="mt-1 w-full rounded-xl border border-black/10 bg-white px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-[color:var(--brand-red)]/30"
+                className="mt-1 w-full min-w-0 rounded-xl border border-black/10 bg-white px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-[color:var(--brand-red)]/30"
                 placeholder="Gluten"
               />
             </label>
@@ -141,19 +141,17 @@ export default async function AllergensAdminPage() {
       {/* LISTA */}
       <div className="mt-6 space-y-3">
         {allergens.map((a) => {
-          const it = (a.label_it ?? "").trim();
-          const en = (a.label_en ?? "").trim();
-          const showIt = it || "—";
-          const showEn = en || "—";
+          const it = (a.label_it ?? "").trim() || "—";
+          const en = (a.label_en ?? "").trim() || "—";
 
           return (
             <details key={a.id} className="group rounded-2xl bg-white ring-1 ring-black/5 overflow-hidden">
               <summary className="list-none cursor-pointer px-4 py-4 flex items-center justify-between gap-3 [&::-webkit-details-marker]:hidden hover:bg-black/[0.02] transition">
                 <div className="min-w-0">
-                  <div className="flex flex-col gap-1 sm:flex-row sm:items-center sm:gap-3">
-                    <div className="text-sm sm:text-base font-semibold text-black/90 truncate">{showIt}</div>
+                  <div className="flex flex-col gap-1 sm:flex-row sm:items-center sm:gap-3 min-w-0">
+                    <div className="text-sm sm:text-base font-semibold text-black/90 truncate">{it}</div>
                     <div className="hidden sm:block h-1 w-1 rounded-full bg-black/20" />
-                    <div className="text-sm sm:text-base text-black/60 truncate">{showEn}</div>
+                    <div className="text-sm sm:text-base text-black/60 truncate">{en}</div>
                   </div>
                 </div>
 
@@ -167,44 +165,43 @@ export default async function AllergensAdminPage() {
               <div className="px-4 pb-4">
                 <div className="mt-2 h-px bg-black/10" />
 
-                <form action={updateAllergen} className="mt-4 grid gap-3 md:grid-cols-[1fr_1fr_190px]">
+                {/* ✅ UN SOLO FORM (niente form annidati) */}
+                <form action={updateAllergen} className="mt-4 grid gap-3 md:grid-cols-[1fr_1fr_240px]">
                   <input type="hidden" name="id" value={a.id} />
 
-                  <label className="block">
+                  <label className="block min-w-0">
                     <span className="text-xs font-medium text-black/70">Nome (IT)</span>
                     <input
                       name="label_it"
                       defaultValue={a.label_it ?? ""}
-                      className="mt-1 w-full rounded-xl border border-black/10 bg-white px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-[color:var(--brand-red)]/30"
+                      className="mt-1 w-full min-w-0 rounded-xl border border-black/10 bg-white px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-[color:var(--brand-red)]/30"
                     />
                   </label>
 
-                  <label className="block">
+                  <label className="block min-w-0">
                     <span className="text-xs font-medium text-black/70">Nome (EN)</span>
                     <input
                       name="label_en"
                       defaultValue={a.label_en ?? ""}
-                      className="mt-1 w-full rounded-xl border border-black/10 bg-white px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-[color:var(--brand-red)]/30"
+                      className="mt-1 w-full min-w-0 rounded-xl border border-black/10 bg-white px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-[color:var(--brand-red)]/30"
                     />
                   </label>
 
-                  <div className="flex gap-2 md:items-end">
+                  <div className="grid grid-cols-2 gap-2 md:items-end">
                     <button
                       type="submit"
-                      className="flex-1 h-[42px] rounded-xl bg-black px-4 py-2 text-sm font-semibold text-white hover:bg-black/90"
+                      className="h-[42px] rounded-xl bg-black px-4 py-2 text-sm font-semibold text-white hover:bg-black/90"
                     >
                       Salva
                     </button>
 
-                    <form action={deleteAllergen} className="contents">
-                      <input type="hidden" name="id" value={a.id} />
-                      <button
-                        type="submit"
-                        className="h-[42px] rounded-xl px-4 py-2 text-sm font-semibold ring-1 ring-red-200 text-red-700 hover:bg-red-50"
-                      >
-                        Elimina
-                      </button>
-                    </form>
+                    <button
+                      type="submit"
+                      formAction={deleteAllergen}
+                      className="h-[42px] rounded-xl px-4 py-2 text-sm font-semibold ring-1 ring-red-200 text-red-700 hover:bg-red-50"
+                    >
+                      Elimina
+                    </button>
                   </div>
                 </form>
               </div>
