@@ -120,7 +120,7 @@ export default async function MenuPage({ params }: { params: Promise<{ lang: Lan
                   <div className="min-w-0 flex items-center gap-3">
                     <span className="inline-flex h-2.5 w-2.5 rounded-full bg-[#1f7a3a]" />
                     <h2
-                      className="min-w-0 truncate text-[26px] sm:text-[30px] font-semibold tracking-tight text-[#c81f2d]"
+                      className="min-w-0 truncate text-[22px] sm:text-[30px] font-semibold tracking-tight text-[#c81f2d]"
                       style={{ fontFamily: "var(--font-display)" }}
                     >
                       {section.title}
@@ -438,8 +438,8 @@ export default async function MenuPage({ params }: { params: Promise<{ lang: Lan
 
         <p className="mt-6 text-center text-sm text-neutral-500">
           {lang === "it"
-            ? "Gli allergeni possono variare: chiedi al personale per conferma."
-            : "Allergens may vary: please ask staff to confirm."}
+            ? "© 2026 Pizzeria La Rosa - Tutti i diritti riservati"
+            : "© 2026 Pizzeria La Rosa - All rights reserved"}
         </p>
       </div>
     </main>
