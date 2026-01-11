@@ -96,7 +96,7 @@ export default function MenuDishRow({ lang, dish }: { lang: Lang; dish: DishRow 
 
         <div className="min-w-0 flex-1">
           <div className="flex items-center justify-between gap-4">
-            <h3 className="min-w-0 truncate text-[21px] sm:text-[22px] font-semibold tracking-tight text-neutral-900 leading-tight">
+            <h3 className="min-w-0 whitespace-normal break-words text-[21px] sm:text-[22px] font-semibold tracking-tight text-neutral-900 leading-tight">
               {name}
             </h3>
 
