@@ -1,62 +1,100 @@
 "use client";
 
+import * as React from "react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
-import * as React from "react";
 
-type Category = { id: string; name_it: string | null; name_en: string | null };
+type CategoryRow = {
+  id: string;
+  name_it: string | null;
+  name_en: string | null;
+  position: number | null;
+  is_active: boolean | null;
+};
 
 export default function CategorySelect({
   categories,
   currentCategoryId,
 }: {
-  categories: Category[];
+  categories: CategoryRow[];
   currentCategoryId: string;
 }) {
   const router = useRouter();
   const sp = useSearchParams();
 
-  function onChange(e: React.ChangeEvent<HTMLSelectElement>) {
-    const next = e.target.value;
+  const [value, setValue] = React.useState(currentCategoryId);
 
-    const params = new URLSearchParams(sp.toString());
+  React.useEffect(() => {
+    setValue(currentCategoryId);
+  }, [currentCategoryId]);
+
+  function onChange(next: string) {
+    setValue(next);
+
+    const params = new URLSearchParams(sp?.toString() ?? "");
     params.set("category", next);
-    params.delete("page");
 
     router.push(`/admin/dishes?${params.toString()}`);
   }
 
   return (
-    <div className="sticky top-0 z-10 bg-[rgb(252,250,246)]/90 backdrop-blur border-b border-black/10">
-      <div className="mx-auto max-w-5xl px-4 py-3">
-        <div className="flex items-center justify-between gap-3">
+    <div className="mx-auto max-w-5xl px-4 pt-5">
+      <section
+        className={[
+          "rounded-2xl bg-[rgb(252,250,246)] ring-1 ring-black/10",
+          "px-4 py-4",
+        ].join(" ")}
+      >
+        {/* MOBILE: colonna (no overflow). DESKTOP: riga */}
+        <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
           <div className="min-w-0">
-            <div className="text-xs font-semibold tracking-wide text-black/55 uppercase">
-              Categoria
+            <div className="text-xs font-semibold tracking-[0.16em] text-black/55">
+              CATEGORIA
             </div>
 
-            <select
-              value={currentCategoryId}
-              onChange={onChange}
-              className="mt-1 w-full max-w-[340px] rounded-xl border border-black/10 bg-white px-3 py-2 text-sm font-semibold outline-none
-                         focus:ring-2 focus:ring-[color:var(--brand-red)]/30"
-            >
-              {categories.map((c) => (
-                <option key={c.id} value={c.id}>
-                  {c.name_it ?? c.name_en ?? "Senza nome"}
-                </option>
-              ))}
-            </select>
+            <div className="mt-2">
+              <select
+                value={value}
+                onChange={(e) => onChange(e.target.value)}
+                className={[
+                  "w-full",                // ✅ mai più overflow
+                  "min-w-0",               // ✅ evita min-width implicite
+                  "rounded-2xl border border-black/10 bg-white",
+                  "px-4 py-3 text-[16px] font-semibold text-black/85",
+                  "outline-none",
+                  "focus:ring-2 focus:ring-[color:var(--brand-red)]/30",
+                ].join(" ")}
+              >
+                {categories.map((c) => {
+                  const label = (c.name_it ?? c.name_en ?? "Senza nome").trim();
+                  return (
+                    <option key={c.id} value={c.id}>
+                      {label}
+                    </option>
+                  );
+                })}
+              </select>
+            </div>
           </div>
 
-          <Link
-            href="/admin/dishes/new"
-            className="shrink-0 rounded-xl bg-black px-4 py-2 text-sm font-semibold text-white hover:bg-black/90"
-          >
-            + Nuovo piatto
-          </Link>
+          {/* CTA: su mobile full-width, su desktop auto */}
+          <div className="flex sm:block">
+            <Link
+              href="/admin/dishes/new"
+              className={[
+                "inline-flex items-center justify-center gap-2",
+                "w-full sm:w-auto", // ✅ su mobile non sborda
+                "rounded-2xl bg-black px-5 py-3",
+                "text-[15px] font-semibold text-white",
+                "shadow-sm hover:bg-black/90",
+              ].join(" ")}
+            >
+              <span className="text-lg leading-none">+</span>
+              Nuovo piatto
+            </Link>
+          </div>
         </div>
-      </div>
+      </section>
     </div>
   );
 }
