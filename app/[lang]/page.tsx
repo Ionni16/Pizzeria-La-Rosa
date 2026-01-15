@@ -67,7 +67,7 @@ export default async function MenuPage({ params }: { params: Promise<{ lang: Lan
 
               <span className="block text-[36px] sm:text-[44px] font-semibold text-neutral-900">
                 <span className="text-[#1f7a3a]/90">La</span>{" "}
-                <span className="text-[#c81f2d]/85">Rosa</span>
+                <span className="text-[#1f7a3a]">Rosa</span>
               </span>
             </h1>
           </div>
@@ -120,7 +120,7 @@ export default async function MenuPage({ params }: { params: Promise<{ lang: Lan
                   <div className="min-w-0 flex items-start gap-3">
                     <span className="mt-2 inline-flex h-2.5 w-2.5 shrink-0 rounded-full bg-[#1f7a3a]" />
                     <h2
-                      className="min-w-0 flex-1 whitespace-normal break-words text-[26px] sm:text-[30px] font-semibold tracking-tight text-[#c81f2d] leading-tight"
+                      className="min-w-0 flex-1 whitespace-normal break-words text-[26px] sm:text-[30px] font-semibold tracking-tight text-[#1f7a3a] leading-tight"
                       style={{ fontFamily: "var(--font-display)" }}
                     >
                       {section.title}
@@ -150,7 +150,7 @@ export default async function MenuPage({ params }: { params: Promise<{ lang: Lan
         </div>
 
         {/* SEZIONE INFO (IT/EN) */}
-        <section className="mt-10 rounded-2xl border border-black/10 bg-white/90 shadow-[0_18px_60px_-42px_rgba(0,0,0,0.45)] overflow-hidden">
+        <section className="mt-10 rounded-2xl border border-[#1f7a3a]/20 bg-[#cef4d5] shadow-[0_16px_48px_-36px_rgba(31,122,58,0.35)] overflow-hidden">
           <div className="px-6 py-8 space-y-8 text-neutral-800 text-[14.5px] leading-relaxed">
             {lang === "it" ? (
               <>
@@ -159,11 +159,13 @@ export default async function MenuPage({ params }: { params: Promise<{ lang: Lan
                   <h3 className="mb-2 text-[20px] font-semibold text-[#c81f2d]" style={{ fontFamily: "var(--font-display)" }}>
                     Informazioni importanti
                   </h3>
-                  <p>
-                    In caso di allergie, vi chiediamo cortesemente di comunicarlo <strong>SEMPRE in cassa</strong>, al momento
-                    dell&apos;ordine.
+                  <p className="rounded-xl bg-white/70 px-4 py-3 text-neutral-800">
+                    In caso di allergie, vi chiediamo cortesemente di comunicarlo{" "}
+                    <strong className="text-[#1f7a3a]">SEMPRE in cassa</strong>, al momento dell&apos;ordine.
                     <br />
-                    <strong>Non abbiamo pizze senza glutine.</strong>
+                    <span className="font-semibold text-[#1f7a3a]">
+                      Non abbiamo pizze senza glutine.
+                    </span>
                   </p>
                 </div>
 
@@ -290,11 +292,14 @@ export default async function MenuPage({ params }: { params: Promise<{ lang: Lan
                   >
                     Important information
                   </h3>
-                  <p>
-                    If you have any allergies, please make sure you <strong>always</strong> inform us at the till when placing
-                    your order.
+                  <p className="rounded-xl bg-white/70 px-4 py-3 text-neutral-800">
+                    If you have any allergies, please make sure to{" "}
+                    <strong className="text-[#1f7a3a]">ALWAYS inform us at the counter</strong>{" "}
+                    when placing your order.
                     <br />
-                    <strong>We do not offer gluten-free pizzas.</strong>
+                    <span className="font-semibold text-[#1f7a3a]">
+                      We do not offer gluten-free pizzas.
+                    </span>
                   </p>
                 </div>
 
