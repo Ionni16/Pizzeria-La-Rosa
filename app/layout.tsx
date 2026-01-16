@@ -1,11 +1,18 @@
-// app/layout.tsx
 import "./globals.css";
-import type { Viewport } from "next";
+import type { Viewport, Metadata } from "next";
 import { Inter, Playfair_Display } from "next/font/google";
 
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
+};
+
+export const metadata: Metadata = {
+  title: {
+    default: "Pizzeria La Rosa",
+    template: "%s · Pizzeria La Rosa",
+  },
+  description: "Menu ufficiale di Pizzeria La Rosa",
 };
 
 const inter = Inter({
@@ -23,7 +30,9 @@ const playfair = Playfair_Display({
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="it">
-      <body className={`${inter.className} ${playfair.variable}`}>{children}</body>
+      <body className={`${inter.className} ${playfair.variable}`}>
+        {children}
+      </body>
     </html>
   );
 }
