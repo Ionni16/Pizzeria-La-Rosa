@@ -55,7 +55,6 @@ export default function DishImage({ src, alt, className }: DishImageProps) {
           src={normalized}
           alt={alt}
           fill
-          unoptimized
           sizes="56px"
           className="object-cover"
           onError={() => setFailedSrc(normalized)}

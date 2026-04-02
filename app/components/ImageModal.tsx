@@ -56,7 +56,7 @@ export default function ImageModal({ open, src, alt, onClose }: ImageModalProps)
               src={src}
               alt=""
               fill
-              unoptimized
+              sizes="100vw"
               className="object-cover blur-2xl scale-110 opacity-60"
               aria-hidden="true"
             />
@@ -69,10 +69,9 @@ export default function ImageModal({ open, src, alt, onClose }: ImageModalProps)
             src={src}
             alt={alt}
             fill
-            unoptimized
             priority
-            className="object-contain"
             sizes="(max-width: 640px) 100vw, 1100px"
+            className="object-contain"
           />
         </div>
       </div>
