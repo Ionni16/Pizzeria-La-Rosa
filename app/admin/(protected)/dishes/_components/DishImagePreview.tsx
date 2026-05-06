@@ -9,7 +9,6 @@ export default function DishImagePreview({ src, alt }: { src: string; alt: strin
           src={src}
           alt={alt}
           fill
-          unoptimized
           className="object-cover"
           sizes="(max-width: 768px) 100vw, 700px"
         />
